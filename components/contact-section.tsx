@@ -6,7 +6,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Send, Loader2 } from "lucide-react";
+import { sendContactEmail } from "@/app/actions";
 
 const contactInfo = [
   {
@@ -36,12 +37,33 @@ export function ContactSection() {
     phone: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("[v0] Form submitted:", formData);
-    alert("Dziękujemy za wiadomość! Skontaktujemy się wkrótce.");
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    setIsSubmitting(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const result = await sendContactEmail(formData);
+
+      if (result.success) {
+        setSuccess(true);
+        setFormData({ name: "", email: "", phone: "", message: "" });
+        // Clear success message after 5 seconds
+        setTimeout(() => setSuccess(false), 5000);
+      } else {
+        setError(result.error || "Wystąpił błąd podczas wysyłania wiadomości.");
+      }
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setError("Wystąpił nieoczekiwany błąd. Spróbuj ponownie później.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -83,6 +105,19 @@ export function ContactSection() {
             <h3 className="text-xl font-medium text-foreground mb-6">
               Wyślij zapytanie
             </h3>
+
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                {error}
+              </div>
+            )}
+
+            {success && (
+              <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+                Dziękujemy za wiadomość! Skontaktujemy się wkrótce.
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Input
@@ -125,9 +160,18 @@ export function ContactSection() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full" size="lg">
-                Wyślij wiadomość
-                <Send className="ml-2 h-4 w-4" />
+              <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    Wysyłanie...
+                    <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Wyślij wiadomość
+                    <Send className="ml-2 h-4 w-4" />
+                  </>
+                )}
               </Button>
             </form>
           </div>
