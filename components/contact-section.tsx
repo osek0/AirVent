@@ -6,31 +6,21 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Send, Loader2 } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { sendContactEmail } from "@/app/actions";
+import { getIcon } from "@/lib/icons";
 
-const contactInfo = [
-  {
-    icon: Phone,
-    label: "Telefon",
-    value: "+48 123 456 789",
-    href: "tel:+48123456789",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "kontakt@airventpro.pl",
-    href: "mailto:kontakt@airventpro.pl",
-  },
-  {
-    icon: MapPin,
-    label: "Adres",
-    value: "ul. Wentylacyjna 15, Warszawa",
-    href: "#",
-  },
-];
+interface ContactSectionProps {
+  content: {
+    subtitle: string;
+    heading: string;
+    description: string;
+    formTitle: string;
+  };
+  items: { id: string; icon: string; label: string; value: string; href: string; order: number }[];
+}
 
-export function ContactSection() {
+export function ContactSection({ content, items }: ContactSectionProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -53,7 +43,6 @@ export function ContactSection() {
       if (result.success) {
         setSuccess(true);
         setFormData({ name: "", email: "", phone: "", message: "" });
-        // Clear success message after 5 seconds
         setTimeout(() => setSuccess(false), 5000);
       } else {
         setError(result.error || "Wystąpił błąd podczas wysyłania wiadomości.");
@@ -72,38 +61,40 @@ export function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           <div>
             <p className="text-sm uppercase tracking-widest text-background/60 mb-2">
-              Kontakt
+              {content.subtitle}
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold text-background mb-6 text-balance">
-              Porozmawiajmy o Twoim projekcie
+              {content.heading}
             </h2>
             <p className="text-background/80 leading-relaxed mb-10">
-              Skontaktuj się z nami, aby uzyskać bezpłatną wycenę lub dowiedzieć się więcej 
-              o naszych usługach. Odpowiemy na wszystkie pytania.
+              {content.description}
             </p>
 
             <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <a
-                  key={index}
-                  href={info.href}
-                  className="flex items-center gap-4 group"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors">
-                    <info.icon className="h-5 w-5 text-background" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-background/60">{info.label}</p>
-                    <p className="text-background font-medium">{info.value}</p>
-                  </div>
-                </a>
-              ))}
+              {items.map((info) => {
+                const Icon = getIcon(info.icon);
+                return (
+                  <a
+                    key={info.id}
+                    href={info.href}
+                    className="flex items-center gap-4 group"
+                  >
+                    <div className="w-12 h-12 rounded-lg bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors">
+                      <Icon className="h-5 w-5 text-background" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-background/60">{info.label}</p>
+                      <p className="text-background font-medium">{info.value}</p>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           </div>
 
           <div className="bg-background rounded-lg p-6 sm:p-8">
             <h3 className="text-xl font-medium text-foreground mb-6">
-              Wyślij zapytanie
+              {content.formTitle}
             </h3>
 
             {error && (

@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model HeroContent {
+  id              String  @id @default("singleton")
+  tagline         String  @default("Profesjonalny montaż wywietrzników")
+  heading         String  @default("Świeże powietrze w Twoim domu przez cały rok")
+  description     String  @default("Specjalizujemy się w montażu nawiewników okiennych, zapewniając optymalną wentylację i komfort w każdym pomieszczeniu.")
+  primaryBtnText  String  @default("Bezpłatna wycena")
+  secondaryBtnText String @default("Poznaj naszą ofertę")
+  backgroundImage String  @default("/images/hero-window.jpg")
+  updatedAt       DateTime @updatedAt
+}
+
+model AboutContent {
+  id         String  @id @default("singleton")
+  subtitle   String  @default("O nas")
+  heading    String  @default("Eksperci w dziedzinie wentylacji okiennej")
+  paragraph1 String  @default("Od ponad 10 lat zajmujemy się profesjonalnym montażem nawiewników okiennych. Nasza firma powstała z pasji do tworzenia zdrowych i komfortowych przestrzeni życiowych.")
+  paragraph2 String  @default("Współpracujemy z wiodącymi producentami nawiewników, co pozwala nam oferować produkty najwyższej jakości w konkurencyjnych cenach. Każdy montaż wykonujemy z najwyższą starannością, dbając o estetykę i funkcjonalność.")
+  image      String  @default("/images/realization-3.jpg")
+  updatedAt  DateTime @updatedAt
+}
+
+model WhyContent {
+  id          String  @id @default("singleton")
+  subtitle    String  @default("Dlaczego warto")
+  heading     String  @default("Korzyści z montażu nawiewników okiennych")
+  description String  @default("Inwestycja w nawiewniki to inwestycja w zdrowie i komfort Twojej rodziny. Oto główne powody, dla których warto zdecydować się na to rozwiązanie.")
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactContent {
+  id          String  @id @default("singleton")
+  subtitle    String  @default("Kontakt")
+  heading     String  @default("Porozmawiajmy o Twoim projekcie")
+  description String  @default("Skontaktuj się z nami, aby uzyskać bezpłatną wycenę lub dowiedzieć się więcej o naszych usługach. Odpowiemy na wszystkie pytania.")
+  formTitle   String  @default("Wyślij zapytanie")
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSettings {
+  id          String  @id @default("singleton")
+  companyName String  @default("AirVent Pro")
+  updatedAt   DateTime @updatedAt
+}
+
+model SectionHeader {
+  id       String @id @default(cuid())
+  section  String @unique
+  subtitle String
+  title    String
+  updatedAt DateTime @updatedAt
+}
+
+model OfferItem {
+  id          String @id @default(cuid())
+  icon        String
+  title       String
+  description String
+  order       Int    @default(0)
+  updatedAt   DateTime @updatedAt
+}
+
+model AboutStat {
+  id        String @id @default(cuid())
+  value     String
+  label     String
+  order     Int    @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model Benefit {
+  id          String @id @default(cuid())
+  number      String
+  title       String
+  description String
+  order       Int    @default(0)
+  updatedAt   DateTime @updatedAt
+}
+
+model Advantage {
+  id        String @id @default(cuid())
+  text      String
+  order     Int    @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model Realization {
+  id        String @id @default(cuid())
+  image     String
+  title     String
+  location  String
+  order     Int    @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String @id @default(cuid())
+  name      String
+  role      String
+  content   String
+  rating    Int    @default(5)
+  order     Int    @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model ContactInfo {
+  id        String @id @default(cuid())
+  icon      String
+  label     String
+  value     String
+  href      String
+  order     Int    @default(0)
+  updatedAt DateTime @updatedAt
+}

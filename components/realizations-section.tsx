@@ -1,46 +1,28 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
-const realizations = [
-  {
-    image: "/images/realization-1.jpg",
-    title: "Montaż nawiewników w apartamencie",
-    location: "Warszawa, Mokotów",
-  },
-  {
-    image: "/images/realization-2.jpg",
-    title: "Wentylacja w domu jednorodzinnym",
-    location: "Kraków, Krowodrza",
-  },
-  {
-    image: "/images/realization-3.jpg",
-    title: "Kompleksowa instalacja w biurowcu",
-    location: "Wrocław, Centrum",
-  },
-  {
-    image: "/images/realization-4.jpg",
-    title: "Nawiewniki w nowym budownictwie",
-    location: "Poznań, Jeżyce",
-  },
-];
+interface RealizationsSectionProps {
+  header: { subtitle: string; title: string };
+  items: { id: string; image: string; title: string; location: string; order: number }[];
+}
 
-export function RealizationsSection() {
+export function RealizationsSection({ header, items }: RealizationsSectionProps) {
   return (
     <section id="realizacje" className="py-24 bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-sm uppercase tracking-widest text-muted-foreground mb-2">
-            Nasze realizacje
+            {header.subtitle}
           </p>
           <h2 className="text-3xl sm:text-4xl font-semibold text-foreground text-balance">
-            Wybrane projekty
+            {header.title}
           </h2>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6">
-          {realizations.map((realization, index) => (
+          {items.map((realization) => (
             <div
-              key={index}
+              key={realization.id}
               className="group relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer"
             >
               <Image

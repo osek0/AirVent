@@ -12,7 +12,11 @@ const navLinks = [
   { href: "#opinie", label: "Opinie" },
 ];
 
-export function Header() {
+interface HeaderProps {
+  companyName: string;
+}
+
+export function Header({ companyName }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -21,7 +25,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center gap-2">
             <Wind className="h-6 w-6 text-foreground" />
-            <span className="text-lg font-semibold tracking-tight">AirVent Pro</span>
+            <span className="text-lg font-semibold tracking-tight">{companyName}</span>
           </a>
 
           <nav className="hidden md:flex items-center gap-8">

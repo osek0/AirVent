@@ -1,46 +1,27 @@
 import { Star } from "lucide-react";
 
-const testimonials = [
-  {
-    name: "Anna Kowalska",
-    role: "Właścicielka mieszkania",
-    content:
-      "Profesjonalna obsługa od początku do końca. Nawiewniki zostały zamontowane szybko i czysto. Różnica w jakości powietrza jest odczuwalna od pierwszego dnia.",
-    rating: 5,
-  },
-  {
-    name: "Marek Nowak",
-    role: "Inwestor",
-    content:
-      "Współpracuję z firmą przy wykończeniu całego osiedla. Terminowość i jakość wykonania na najwyższym poziomie. Polecam każdemu deweloperowi.",
-    rating: 5,
-  },
-  {
-    name: "Katarzyna Wiśniewska",
-    role: "Właścicielka domu",
-    content:
-      "Problem z wilgocią i skraplającą się parą na oknach zniknął całkowicie. Żałuję tylko, że nie zamontowaliśmy nawiewników wcześniej!",
-    rating: 5,
-  },
-];
+interface TestimonialsSectionProps {
+  header: { subtitle: string; title: string };
+  items: { id: string; name: string; role: string; content: string; rating: number; order: number }[];
+}
 
-export function TestimonialsSection() {
+export function TestimonialsSection({ header, items }: TestimonialsSectionProps) {
   return (
     <section id="opinie" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-sm uppercase tracking-widest text-muted-foreground mb-2">
-            Opinie klientów
+            {header.subtitle}
           </p>
           <h2 className="text-3xl sm:text-4xl font-semibold text-foreground text-balance">
-            Co mówią o nas klienci
+            {header.title}
           </h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {items.map((testimonial) => (
             <div
-              key={index}
+              key={testimonial.id}
               className="p-6 border border-border rounded-lg"
             >
               <div className="flex gap-1 mb-4">
