@@ -33,7 +33,7 @@ export async function sendContactEmail(formData: ContactFormData) {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'BS BestService <onboarding@resend.dev>', // Change this to your verified domain
-      to: 'kontakt@bestservice.pl', // Your email address
+      to: 'kontakt@kopgus.pl', // Your email address
       replyTo: formData.email,
       subject: `Nowe zapytanie od ${formData.name}`,
       html: `

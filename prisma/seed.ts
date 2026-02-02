@@ -180,7 +180,7 @@ async function main() {
   // Contact Info
   const contactInfos = [
     { icon: "Phone", label: "Telefon", value: "+48 123 456 789", href: "tel:+48123456789", order: 0 },
-    { icon: "Mail", label: "Email", value: "kontakt@bestservice.pl", href: "mailto:kontakt@bestservice.pl", order: 1 },
+    { icon: "Mail", label: "Email", value: "kontakt@kopgus.pl", href: "mailto:kontakt@kopgus.pl", order: 1 },
     { icon: "MapPin", label: "Adres", value: "ul. Wentylacyjna 15, Warszawa", href: "#", order: 2 },
   ];
   const existingContactInfos = await prisma.contactInfo.count();
