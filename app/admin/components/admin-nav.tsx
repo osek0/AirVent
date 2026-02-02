@@ -34,7 +34,7 @@ export function AdminNav({ user }: AdminNavProps) {
       <div className="flex h-14 items-center justify-between px-6">
         <div className="flex items-center gap-4">
           <Link href="/admin" className="font-semibold">
-            AirVent Admin
+            BS BestService Admin
           </Link>
           <button
             type="button"

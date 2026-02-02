@@ -9,7 +9,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'AirVent Pro - Profesjonalny Montaż Wywietrzników Okiennych',
+  title: 'BS BestService - Profesjonalny Montaż Wywietrzników Okiennych',
   description: 'Specjalizujemy się w montażu wywietrzników okiennych. Zapewniamy świeże powietrze i komfort w Twoim domu. Profesjonalna obsługa, konkurencyjne ceny.',
   generator: 'v0.app',
   icons: {

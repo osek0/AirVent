@@ -25,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return {
             id: "1",
             name: "Admin",
-            email: "admin@airvent.pl",
+            email: "admin@BestService.pl",
           }
         }
 

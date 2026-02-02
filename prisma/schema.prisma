@@ -48,7 +48,7 @@ model ContactContent {
 
 model SiteSettings {
   id          String  @id @default("singleton")
-  companyName String  @default("AirVent Pro")
+  companyName String  @default("BS BestService")
   updatedAt   DateTime @updatedAt
 }
 

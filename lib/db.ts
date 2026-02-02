@@ -119,13 +119,15 @@ export async function getContactData() {
     },
     items: items.length > 0 ? items : [
       { id: "1", icon: "Phone", label: "Telefon", value: "+48 123 456 789", href: "tel:+48123456789", order: 0 },
-      { id: "2", icon: "Mail", label: "Email", value: "kontakt@airventpro.pl", href: "mailto:kontakt@airventpro.pl", order: 1 },
+      { id: "2", icon: "Mail", label: "Email", value: "kontakt@bestservice.pl", href: "mailto:kontakt@bestservice.pl", order: 1 },
       { id: "3", icon: "MapPin", label: "Adres", value: "ul. Wentylacyjna 15, Warszawa", href: "#", order: 2 },
+      { id: "4", icon: "Facebook", label: "Facebook", value: "BS BestService", href: "https://facebook.com/", order: 3 },
+      { id: "5", icon: "Instagram", label: "Instagram", value: "@bestservice", href: "https://instagram.com/", order: 4 },
     ],
   };
 }
 
 export async function getSiteSettings() {
   const data = await prisma.siteSettings.findUnique({ where: { id: "singleton" } });
-  return data ?? { id: "singleton", companyName: "AirVent Pro" };
+  return data ?? { id: "singleton", companyName: "BS BestService" };
 }

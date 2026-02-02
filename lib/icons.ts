@@ -22,6 +22,8 @@ import {
   Award,
   Heart,
   Leaf,
+  Facebook,
+  Instagram,
   type LucideIcon,
 } from "lucide-react";
 
@@ -49,6 +51,8 @@ export const iconMap: Record<string, LucideIcon> = {
   Award,
   Heart,
   Leaf,
+  Facebook,
+  Instagram,
 };
 
 export const iconNames = Object.keys(iconMap);

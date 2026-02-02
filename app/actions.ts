@@ -32,8 +32,8 @@ export async function sendContactEmail(formData: ContactFormData) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'AirVent Pro <onboarding@resend.dev>', // Change this to your verified domain
-      to: 'kontakt@airventpro.pl', // Your email address
+      from: 'BS BestService <onboarding@resend.dev>', // Change this to your verified domain
+      to: 'kontakt@bestservice.pl', // Your email address
       replyTo: formData.email,
       subject: `Nowe zapytanie od ${formData.name}`,
       html: `
@@ -54,7 +54,7 @@ export async function sendContactEmail(formData: ContactFormData) {
           <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
 
           <p style="color: #666; font-size: 12px;">
-            Ta wiadomość została wysłana z formularza kontaktowego na stronie AirVent Pro.
+            Ta wiadomość została wysłana z formularza kontaktowego na stronie BS BestService.
           </p>
         </div>
       `,

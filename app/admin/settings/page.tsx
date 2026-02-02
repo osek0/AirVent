@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
 export default function SettingsEditor() {
-  const [companyName, setCompanyName] = useState("AirVent Pro");
+  const [companyName, setCompanyName] = useState("BS BestService");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {

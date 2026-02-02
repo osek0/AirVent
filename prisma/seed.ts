@@ -69,7 +69,7 @@ async function main() {
     update: {},
     create: {
       id: "singleton",
-      companyName: "AirVent Pro",
+      companyName: "BS BestService",
     },
   });
   console.log("  ✓ Site settings");
@@ -180,7 +180,7 @@ async function main() {
   // Contact Info
   const contactInfos = [
     { icon: "Phone", label: "Telefon", value: "+48 123 456 789", href: "tel:+48123456789", order: 0 },
-    { icon: "Mail", label: "Email", value: "kontakt@airventpro.pl", href: "mailto:kontakt@airventpro.pl", order: 1 },
+    { icon: "Mail", label: "Email", value: "kontakt@bestservice.pl", href: "mailto:kontakt@bestservice.pl", order: 1 },
     { icon: "MapPin", label: "Adres", value: "ul. Wentylacyjna 15, Warszawa", href: "#", order: 2 },
   ];
   const existingContactInfos = await prisma.contactInfo.count();
