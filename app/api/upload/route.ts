@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put } from "@vercel/blob";
+import { uploadToR2 } from "@/lib/r2";
 import { auth } from "@/auth";
 
 export async function POST(request: NextRequest) {
@@ -15,9 +15,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
   }
 
-  const blob = await put(file.name, file, {
-    access: "public",
-  });
+  const url = await uploadToR2(file);
 
-  return NextResponse.json({ url: blob.url });
+  return NextResponse.json({ url });
 }

@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { put, del } from "@vercel/blob";
+import { uploadToR2, deleteFromR2 } from "@/lib/r2";
 
 async function requireAuth() {
   const session = await auth();
@@ -256,15 +256,14 @@ export async function uploadImage(formData: FormData): Promise<string> {
   const file = formData.get("file") as File;
   if (!file) throw new Error("No file provided");
 
-  const blob = await put(file.name, file, { access: "public" });
-  return blob.url;
+  return await uploadToR2(file);
 }
 
 export async function deleteImage(url: string) {
   await requireAuth();
   try {
-    await del(url);
+    await deleteFromR2(url);
   } catch {
-    // Blob may not exist or may be a local image
+    // Object may not exist or may be a local image
   }
 }

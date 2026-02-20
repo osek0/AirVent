@@ -8,7 +8,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "*.public.blob.vercel-storage.com",
+        hostname: new URL(process.env.R2_PUBLIC_URL || "https://placeholder.com").hostname,
       },
     ],
   },

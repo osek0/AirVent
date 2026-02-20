@@ -1,7 +1,6 @@
 import React from "react"
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
 import './globals.css'
 
@@ -41,7 +40,8 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         {children}
         <Toaster richColors />
-        <Analytics />
+        {/* Add Cloudflare Web Analytics: get your beacon token from the Cloudflare dashboard */}
+        {/* <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_TOKEN"}' /> */}
       </body>
     </html>
   )
